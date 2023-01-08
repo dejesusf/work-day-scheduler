@@ -10,26 +10,37 @@ var sixteenEl = $('#hour-16');
 var seventeenEl = $('#hour-17');
 
 //button variables
-var saveBtn9= $(".saveBtn9")
-var saveBtn10= $(".saveBtn10")
-var saveBtn11= $(".saveBtn11")
-var saveBtn12= $(".saveBtn12")
-var saveBtn13= $(".saveBtn13")
-var saveBtn14= $(".saveBtn14")
-var saveBtn15= $(".saveBtn15")
-var saveBtn16= $(".saveBtn16")
-var saveBtn17= $(".saveBtn17")
+var saveBtn9= $('#hour-9').children('button');
+var saveBtn10= $('#hour-10').children('button');
+var saveBtn11= $('#hour-11').children('button');
+var saveBtn12= $('#hour-12').children('button');
+var saveBtn13= $('#hour-13').children('button');
+var saveBtn14= $('#hour-14').children('button');
+var saveBtn15= $('#hour-15').children('button');
+var saveBtn16= $('#hour-16').children('button');
+var saveBtn17= $('#hour-17').children('button');
+
+//schedule input variables
+var nineInput= $('#hour-9').children('textarea');
+var tenInput= $('#hour-10').children('textarea');
+var elevenInput= $('#hour-11').children('textarea');
+var twelveInput= $('#hour-12').children('textarea');
+var thirteenEl = $('#hour-13').children('textarea');
+var fourteenEl = $('#hour-14').children('textarea');
+var fifteenEl = $('#hour-15').children('textarea');
+var sixteenEl = $('#hour-16').children('textarea');
+var seventeenEl = $('#hour-17').children('textarea');
 
 //dayjs for hour blocks
-var hourNine= dayjs().hour(9).minute(00).format('HH:mm')
-var hourTen= dayjs().hour(10).minute(00).format('HH:mm')
-var hourEleven= dayjs().hour(11).minute(00).format('HH:mm')
-var hourTwelve= dayjs().hour(12).minute(00).format('HH:mm')
-var hourThirteen= dayjs().hour(13).minute(00).format('HH:mm')
-var hourFourteen= dayjs().hour(14).minute(00).format('HH:mm')
-var hourFifteen= dayjs().hour(15).minute(00).format('HH:mm')
-var hourSixteen= dayjs().hour(16).minute(00).format('HH:mm')
-var hourSeventeen= dayjs().hour(17).minute(00).format('HH:mm')
+var hourNine= dayjs().hour(9).minute(00).format('HH:mm');
+var hourTen= dayjs().hour(10).minute(00).format('HH:mm');
+var hourEleven= dayjs().hour(11).minute(00).format('HH:mm');
+var hourTwelve= dayjs().hour(12).minute(00).format('HH:mm');
+var hourThirteen= dayjs().hour(13).minute(00).format('HH:mm');
+var hourFourteen= dayjs().hour(14).minute(00).format('HH:mm');
+var hourFifteen= dayjs().hour(15).minute(00).format('HH:mm');
+var hourSixteen= dayjs().hour(16).minute(00).format('HH:mm');
+var hourSeventeen= dayjs().hour(17).minute(00).format('HH:mm');
 
 //display dayjs in the hour block div
 nineEl.children('div').text(hourNine);
@@ -42,25 +53,81 @@ fifteenEl.children('div').text(hourFifteen);
 sixteenEl.children('div').text(hourSixteen);
 seventeenEl.children('div').text(hourSeventeen);
 
+// //variable for localStorage
+var localEvents= {
+  nineEvent: "",
+  tenEvent: "",
+  elevenEvent: "",
+  twelveEvent: "",
+  thirteenEvent: "",
+  fourteenEvent: "",
+  fifteenEvent: "",
+  sixteenEvent: "",
+  seventeenEvent: ""
+}
+
 // setInterval to display current date and time in header
 setInterval(function(){
   var dateTime= dayjs().format('MMMM D, YYYY [at] HH:mm:ss');
   $('#currentDay').text(dateTime);
 }, 1000);
-
-//saveInput function localStorage
-
-
-//event listenter for save button
-saveBtn.addEventListener("click",saveInput);
-
-$(function () {
-  // TODO: Add a listener for click events on the save button. This code should use the id in the containing time-block as a key to save the user input in local storage. HINT: What does `this` reference in the click listener function? How can DOM traversal be used to get the "hour-x" id of the time-block containing the button that was clicked? How might the id be useful when saving the description in local storage?
   
-
-  // TODO: Add code to apply the past, present, or future class to each time block by comparing the id to the current hour. HINTS: How can the id attribute of each time-block be used to conditionally add or remove the past, present, and future classes? How can Day.js be used to get the current hour in 24-hour time?
-
-  // TODO: Add code to get any user input that was saved in localStorage and set the values of the corresponding textarea elements. HINT: How can the id attribute of each time-block be used to do this?
-
- 
+//event listener for each save button and save to localStorage
+saveBtn9.on("click",function(event){
+  event.preventDefault();
+  localEvents.nineEvent= nineInput.val();
+  localStorage.setItem("stored-event",JSON.stringify(localEvents))
 });
+
+saveBtn10.on("click",function(event){
+  event.preventDefault();
+  localEvents.tenEvent= tenInput.val();
+  localStorage.setItem("stored-event",JSON.stringify(localEvents))
+});
+
+saveBtn11.on("click",function(event){
+  event.preventDefault();
+  localEvents.elevenEvent= elevenInput.val();
+  localStorage.setItem("stored-event",JSON.stringify(localEvents))
+});
+
+saveBtn12.on("click",function(event){
+  event.preventDefault();
+  localEvents.twelveEvent= twelveInput.val();
+  localStorage.setItem("stored-event",JSON.stringify(localEvents))
+});
+
+saveBtn13.on("click",function(event){
+  event.preventDefault();
+  localEvents.thirteenEvent= thireenInput.val();
+  localStorage.setItem("stored-event",JSON.stringify(localEvents))
+});
+
+saveBtn14.on("click",function(event){
+  event.preventDefault();
+  localEvents.fourteenEvent= fourteenInput.val();
+  localStorage.setItem("stored-event",JSON.stringify(localEvents))
+});
+
+saveBtn15.on("click",function(event){
+  event.preventDefault();
+  localEvents.fifteenEvent= fifteenInput.val();
+  localStorage.setItem("stored-event",JSON.stringify(localEvents))
+});
+
+saveBtn16.on("click",function(event){
+  event.preventDefault();
+  localEvents.sixteenEvent= sixteenInput.val();
+  localStorage.setItem("stored-event",JSON.stringify(localEvents))
+});
+
+saveBtn17.on("click",function(event){
+  event.preventDefault();
+  localEvents.seventeenEvent= seventeenInput.val();
+  localStorage.setItem("stored-event",JSON.stringify(localEvents))
+});
+
+//render saved events
+
+
+// TODO: Add code to apply the past, present, or future class to each time block by comparing the id to the current hour. HINTS: How can the id attribute of each time-block be used to conditionally add or remove the past, present, and future classes? How can Day.js be used to get the current hour in 24-hour time?
