@@ -25,11 +25,11 @@ var nineInput= $('#hour-9').children('textarea');
 var tenInput= $('#hour-10').children('textarea');
 var elevenInput= $('#hour-11').children('textarea');
 var twelveInput= $('#hour-12').children('textarea');
-var thirteenEl = $('#hour-13').children('textarea');
-var fourteenEl = $('#hour-14').children('textarea');
-var fifteenEl = $('#hour-15').children('textarea');
-var sixteenEl = $('#hour-16').children('textarea');
-var seventeenEl = $('#hour-17').children('textarea');
+var thirteenInput = $('#hour-13').children('textarea');
+var fourteenInput = $('#hour-14').children('textarea');
+var fifteenInput = $('#hour-15').children('textarea');
+var sixteenInput = $('#hour-16').children('textarea');
+var seventeenInput = $('#hour-17').children('textarea');
 
 //dayjs for hour blocks
 var hourNine= dayjs().hour(9).minute(00).format('HH:mm');
@@ -71,6 +71,10 @@ setInterval(function(){
   var dateTime= dayjs().format('MMMM D, YYYY [at] HH:mm:ss');
   $('#currentDay').text(dateTime);
 }, 1000);
+
+//update color for past, present, and future events
+
+
   
 //event listener for each save button and save to localStorage
 saveBtn9.on("click",function(event){
@@ -128,6 +132,25 @@ saveBtn17.on("click",function(event){
 });
 
 //render saved events
+function renderLocalEvents() {
+  var savedEvents=JSON.parse(localStorage.getItem("stored-event"));
+  if (savedEvents == null) {
+    return
+  }
+  localEvents=savedEvents;
+  //keep events on page by replacing inputs with saved info from localStorage
+  nineInput.val(localEvents.nineEvent);
+  tenInput.val(localEvents.tenEvent);
+  elevenInput.val(localEvents.elevenEvent);
+  twelveInput.val(localEvents.twelveEvent);
+  thirteenInput.val(localEvents.thirteenEvent);
+  fourteenInput.val(localEvents.fourteenEvent);
+  fifteenInput.val(localEvents.fifteenEvent);
+  sixteenInput.val(localEvents.sixteenEvent);
+  seventeenInput.val(localEvents.seventeenEvent);
+}
 
+//execute render
+renderLocalEvents();
 
 // TODO: Add code to apply the past, present, or future class to each time block by comparing the id to the current hour. HINTS: How can the id attribute of each time-block be used to conditionally add or remove the past, present, and future classes? How can Day.js be used to get the current hour in 24-hour time?
