@@ -53,7 +53,7 @@ fifteenEl.children('div').text(hourFifteen);
 sixteenEl.children('div').text(hourSixteen);
 seventeenEl.children('div').text(hourSeventeen);
 
-// //variable for localStorage
+//variable for localStorage
 var localEvents= {
   nineEvent: "",
   tenEvent: "",
@@ -73,9 +73,23 @@ setInterval(function(){
 }, 1000);
 
 //update color for past, present, and future events
+//select all time-block class DOM elements
+var timeBlock= $('.time-block');
+function colorEvent() {
+  var currentTime= dayjs().format('HH:mm');
+  for (i=0; i<timeBlock.length; i++){
+    if (timeBlock[i]<currentTime){
+      timeBlock.addClass('past')
+    } else if (timeBlock[i]==currentTime) {
+      timeBlock.addClass('present')
+    } else if (timeBlock[i]>currentTime) {
+      timeBlock.addClass('future')
+    }
+  }
+}
+//setInterval so that colors will update every hour
+setInterval(colorEvent, 3600000);
 
-
-  
 //event listener for each save button and save to localStorage
 saveBtn9.on("click",function(event){
   event.preventDefault();
@@ -150,7 +164,6 @@ function renderLocalEvents() {
   seventeenInput.val(localEvents.seventeenEvent);
 }
 
-//execute render
+//execute functions
+colorEvent();
 renderLocalEvents();
-
-// TODO: Add code to apply the past, present, or future class to each time block by comparing the id to the current hour. HINTS: How can the id attribute of each time-block be used to conditionally add or remove the past, present, and future classes? How can Day.js be used to get the current hour in 24-hour time?
