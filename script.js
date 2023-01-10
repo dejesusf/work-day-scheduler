@@ -75,20 +75,22 @@ setInterval(function(){
 //update color for past, present, and future events
 //select all time-block class DOM elements
 var timeBlock= $('.time-block');
+var hourBlock= $('.hour');
 function colorEvent() {
   var currentTime= dayjs().format('HH:mm');
-  for (i=0; i<timeBlock.length; i++){
-    if (timeBlock[i]<currentTime){
+  for (i=0; i<hourBlock.length; i++){
+    if (hourBlock[i].innerHTML < currentTime){
       timeBlock.addClass('past')
-    } else if (timeBlock[i]==currentTime) {
+    } else if (hourBlock[i].innerHTML == currentTime) {
       timeBlock.addClass('present')
-    } else if (timeBlock[i]>currentTime) {
+    } else if (hourBlock[i].innerHTML > currentTime) {
       timeBlock.addClass('future')
     }
+    console.log(hourBlock)
   }
 }
 //setInterval so that colors will update every hour
-setInterval(colorEvent, 3600000);
+setInterval(colorEvent, 60000);
 
 //event listener for each save button and save to localStorage
 saveBtn9.on("click",function(event){
