@@ -119,7 +119,7 @@ saveBtn12.on("click",function(event){
 
 saveBtn13.on("click",function(event){
   event.preventDefault();
-  localEvents.thirteenEvent= thireenInput.val();
+  localEvents.thirteenEvent= thirteenInput.val();
   localStorage.setItem("stored-event",JSON.stringify(localEvents))
 });
 
